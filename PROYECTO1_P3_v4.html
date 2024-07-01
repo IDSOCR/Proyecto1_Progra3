@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrícula Escolar - Escuela Metodista</title>
+
+    <!-- Incluyo Bootstrap para facilitar el diseño responsivo y estilizado -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilos básicos para el cuerpo del documento */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .summary {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Matrícula</h1>
+        <h3>Ivar Solera Quesada</h3>
+        <h3>María José Zúñiga</h3>
+
+        <!-- Formulario principal para la matrícula -->
+        <form id="matriculaForm" class="needs-validation" novalidate>
+            <h3>Datos del Estudiante</h3>
+            <div class="form-group">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                <div class="invalid-feedback">Por favor ingrese el nombre completo.</div>
+            </div>
+            <div class="form-group">
+                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+                <div class="invalid-feedback">Por favor ingrese la fecha de nacimiento.</div>
+            </div>
+            <div class="form-group">
+                <label for="cedula">Número de Identificación (Cédula)</label>
+                <input type="text" class="form-control" id="cedula" name="cedula" required>
+                <div class="invalid-feedback">Por favor ingrese el número de identificación.</div>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección de Residencia</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" required>
+                <div class="invalid-feedback">Por favor ingrese la dirección de residencia.</div>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono de Contacto</label>
+                <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                <div class="invalid-feedback">Por favor ingrese el teléfono de contacto.</div>
+            </div>
+            <div class="form-group">
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" class="form-control" id="correo" name="correo" required>
+                <div class="invalid-feedback">Por favor ingrese un correo electrónico válido.</div>
+            </div>
+
+            <h3>Información Académica</h3>
+            <div class="form-group">
+                <!-- Cambié el campo de grado a una lista desplegable para facilitar la selección -->
+                <label for="grado">Grado al que se Matricula</label>
+                <select class="form-control" id="grado" name="grado" required>
+                    <option value="" disabled selected>Seleccione un grado</option>
+                    <option value="Primero">Primero</option>
+                    <option value="Segundo">Segundo</option>
+                    <option value="Tercero">Tercero</option>
+                    <option value="Cuarto">Cuarto</option>
+                    <option value="Quinto">Quinto</option>
+                    <option value="Sexto">Sexto</option>
+		    <option value="Septimo">Septimo</option>
+                </select>
+                <div class="invalid-feedback">Por favor seleccione un grado.</div>
+            </div>
+            <div class="form-group">
+                <label for="materias">Materias</label>
+                <select multiple class="form-control" id="materias" name="materias">
+                    <option value="Matemáticas">Matemáticas</option>
+                    <option value="Ciencias">Ciencias</option>
+                    <option value="Historia">Historia</option>
+                    <option value="Lenguaje">Lenguaje</option>
+                    <option value="Educación Física">Educación Física</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="certificadoNotas">Certificado de Notas</label>
+                <!-- Hice que el campo de certificado de notas no sea obligatorio -->
+                <input type="file" class="form-control" id="certificadoNotas" name="certificadoNotas">
+                <div class="invalid-feedback">Por favor adjunte el certificado de notas.</div>
+            </div>
+
+            <h3>Información del Padre o Tutor</h3>
+            <div class="form-group">
+                <label for="nombrePadre">Nombre Completo del Padre o Tutor</label>
+                <input type="text" class="form-control" id="nombrePadre" name="nombrePadre" required>
+                <div class="invalid-feedback">Por favor ingrese el nombre completo del padre o tutor.</div>
+            </div>
+            <div class="form-group">
+                <label for="telefonoPadre">Teléfono de Contacto del Padre o Tutor</label>
+                <input type="tel" class="form-control" id="telefonoPadre" name="telefonoPadre" required>
+                <div class="invalid-feedback">Por favor ingrese el teléfono de contacto del padre o tutor.</div>
+            </div>
+            <div class="form-group">
+                <label for="correoPadre">Correo Electrónico del Padre o Tutor</label>
+                <input type="email" class="form-control" id="correoPadre" name="correoPadre" required>
+                <div class="invalid-feedback">Por favor ingrese un correo electrónico válido del padre o tutor.</div>
+            </div>
+
+            <!-- Botones para calcular el costo y registrar el formulario -->
+            <button type="button" class="btn btn-primary btn-block" onclick="calcularCosto()">Calcular Costo</button>
+            <button type="submit" class="btn btn-success btn-block">Registrar</button>
+        </form>
+
+        <!-- Resumen de la matrícula que se muestra después del registro -->
+        <div id="resumen" class="summary" style="display: none;">
+            <h3>Resumen de Matrícula</h3>
+            <p><strong>Nombre del Estudiante:</strong> <span id="resumenNombre"></span></p>
+            <p><strong>Grado:</strong> <span id="resumenGrado"></span></p>
+            <p><strong>Materias:</strong> <span id="resumenMaterias"></span></p>
+            <p><strong>Costo Total:</strong> ₡<span id="resumenCosto"></span></p>
+        </div>
+    </div>
+    
+    <!-- Incluyo jQuery y Bootstrap para funcionalidades avanzadas -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Documento listo y configuración de validación del formulario
+        $(document).ready(function() {
+            $('#matriculaForm').on('submit', function(event) {
+                event.preventDefault();
+                if (this.checkValidity() === false) {
+                    event.stopPropagation();
+                } else {
+                    generarResumen();  // Genero el resumen de la matrícula
+                    guardarEnArchivo();  // Guardo la información en un archivo de texto
+                    alert('Formulario enviado con éxito.');
+                }
+                this.classList.add('was-validated');
+            });
+        });
+
+        // Función para calcular el costo total de la matrícula basado en las materias seleccionadas
+        function calcularCosto() {
+            const materiasSeleccionadas = $('#materias').val();
+            const costoPorMateria = 50000; // Ejemplo de costo por materia en colones
+            const costoTotal = materiasSeleccionadas.length * costoPorMateria;
+            $('#resumenCosto').text(costoTotal);
+            $('#resumen').show(); // Muestro el resumen con el costo total
+        }
+
+        // Función para generar el resumen de la matrícula con la información ingresada
+        function generarResumen() {
+            $('#resumenNombre').text($('#nombre').val());
+            $('#resumenGrado').text($('#grado').val());
+            $('#resumenMaterias').text($('#materias').val().join(', '));
+        }
+
+        // Función para guardar la información en un archivo de texto
+        function guardarEnArchivo() {
+            const nombre = $('#nombre').val();
+            const grado = $('#grado').val();
+            const materias = $('#materias').val().join(', ');
+            const costo = $('#resumenCosto').text();
+            const resumen = `Nombre del Estudiante: ${nombre}\nGrado: ${grado}\nMaterias: ${materias}\nCosto Total: ₡${costo}\n`;
+
+            // Creo un blob de texto y genero un enlace para descargar el archivo
+            const blob = new Blob([resumen], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'resumen_matricula.txt';
+            link.click();
+        }
+    </script>
+</body>
+</html>
